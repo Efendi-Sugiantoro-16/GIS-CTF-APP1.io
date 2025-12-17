@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyber-primary: #00ff9d;
+  --cyber-secondary: #7000ff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-primary);
+}
+
+.leaflet-container {
+  background: #0a0a12;
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: rgba(10, 10, 18, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 157, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.shadow-neon {
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+}
+
+/* Custom Marker Styles */
+.marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+    box-shadow: 0 0 10px currentColor; /* Glow */
+}
+
+.marker-pin::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 8px 0 0 8px;
+    background: #000;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.marker-pulse {
+    background: inherit;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+    left: 10px;
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.1, 0.1);
+        opacity: 0.0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(2.5, 2.5);
+        opacity: 0.0;
+    }
+}
+
+/* Flight Path Animation */
+.animate-dash {
+    stroke-dasharray: 5, 10;
+    animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
+
+.animate-dash-fast {
+    stroke-dasharray: 10, 20;
+    animation: dash-fast 1s linear infinite;
+}
+
+@keyframes dash-fast {
+    from {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -200;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+}
+.animate-scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Team Card Dynamic Hover */
+.team-card {
+    transition: all 0.3s ease;
+}
+.team-card:hover {
+    border-color: var(--team-color);
+    box-shadow: 0 0 15px var(--team-color-alpha);
+}
+
+/* Low Performance Overrides */
+body.low-performance .animate-pulse,
+body.low-performance .animate-dash,
+body.low-performance .animate-dash-fast,
+body.low-performance .marker-pulse,
+body.low-performance .animate-fade-in,
+body.low-performance .animate-scale-in {
+    animation: none !important;
+    transition: none !important;
+}
+
+body.low-performance .glass-panel {
+    backdrop-filter: none;
+    background: rgba(10, 10, 18, 0.95);
+}
+
